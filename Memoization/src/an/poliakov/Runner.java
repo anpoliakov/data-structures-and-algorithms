@@ -10,7 +10,7 @@ import java.util.Arrays;
  * */
 public class Runner {
     public static void main(String[] args) {
-        int n = 3;                                //число Фибоначи от 100
+        int n = 300;                                //число Фибоначи от 100
         long [] mas = new long[n + 1];              //собственно сам массив который хранит результаты вычислений
         Arrays.fill(mas, -1);                   //заполнение массива определённым элементом (-1) что бы понимать места в которых метод не проходил
 
