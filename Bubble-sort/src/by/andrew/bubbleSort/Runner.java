@@ -52,6 +52,14 @@ public class Runner {
         showMas(mas);
     }
 
+    //сортировка расчёской (ещё более быстрый вариант, минус - она не устойчивая)
+    public static void startCombSort(int [] mas){
+        float step = 1.247f; // шаг на первом проходе
+        while (){
+
+        }
+    }
+
     public static void showMas(int [] mas){
         System.out.print("MAS: [ ");
         for (int n : mas){
