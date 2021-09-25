@@ -9,6 +9,7 @@ public class Runner {
     }
 
     // стандартная сортировка пузырьком
+    //TODO: что бы часть массива (отсортированного) не перебиралось, хранить точку в массиве с которой пересматриваю элементы
     public static void startBubbleSort(int [] mas){
         for(int i = 0; i < mas.length; i++){
             for(int j = 0; j < mas.length - 1 - i; j++){
