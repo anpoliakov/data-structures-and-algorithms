@@ -3,7 +3,7 @@ package by.andrew.bubbleSort;
 public class Runner {
 
     public static void main(String[] args) {
-        int [] mas = new int[]{1,2,3,4,5,6,7,9,8,2};
+        int [] mas = new int[]{1,2,3,4,6,5,8,7,7,9};
         //startBubbleSort(mas);
         //startShakerSort(mas);
 
@@ -65,23 +65,35 @@ public class Runner {
 
     //сортировка расчёской (ещё более быстрый вариант)
     public static void startCombSort(int [] mas){
-        float CONST = 1.3f; //получено эксп. путём
-        int step = Math.round(mas.length/CONST);
+        int gap = mas.length; //инициализируем шаг между сравн. знач
+        boolean swapped = true;
 
-        //TODO: есть нюанс с последней проверкой (каждого числа между собой)
-        while (step > 1){
-            for(int i = 0; i + step < mas.length; i++){
-                if(mas[i] > mas[i + step]){
+        while (gap != 1 || swapped == true){
+            gap = getNextGap(gap);
+            swapped = false;
+            for (int i = 0; i < mas.length - gap; i++) {
+                if (mas[i] > mas[i + gap]) {
                     int temp = mas[i];
-                    mas[i] = mas[i + step];
-                    mas[i + step] = temp;
+                    mas[i] = mas[i + gap];
+                    mas[i + gap] = temp;
+                    swapped = true;
                 }
             }
-
-            if(step > 1){
-                step = (int)(step/CONST);
-            }
         }
+    }
+
+    //метод для получения шага между проверяемыми элементами (сортировка расчёской)
+    public static int getNextGap(int gap){
+        gap = (gap * 10)/13;
+        int temp;
+
+            if(gap < 1){
+                temp = 1;
+            }else {
+                temp = gap;
+            }
+
+        return temp;
     }
 
     public static void showMas(int [] mas){
