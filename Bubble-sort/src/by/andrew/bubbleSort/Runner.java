@@ -3,10 +3,14 @@ package by.andrew.bubbleSort;
 public class Runner {
 
     public static void main(String[] args) {
-        int [] mas = new int[]{4,1,3,5,2,0,9,6,7,8,1,4,7};
+        int [] mas = new int[]{1,2,3,4,5,6,7,9,8,2};
         //startBubbleSort(mas);
-        startShakerSort(mas);
+        //startShakerSort(mas);
+
+        startCombSort(mas);
+        showMas(mas);
     }
+
 
     // стандартная сортировка пузырьком
     //TODO: что бы часть массива (отсортированного) не перебиралось, хранить точку в массиве с которой пересматриваю элементы
@@ -22,6 +26,7 @@ public class Runner {
         }
         showMas(mas);
     }
+
 
     //шейкерная сортировка (более быстрый аналог пузырьковой)
     public static void startShakerSort(int [] mas){
@@ -49,15 +54,33 @@ public class Runner {
             }
             leftIndex ++;
         }
-
         showMas(mas);
     }
 
-    //сортировка расчёской (ещё более быстрый вариант, минус - она не устойчивая)
-    public static void startCombSort(int [] mas){
-        float step = 1.247f; // шаг на первом проходе
-        while (){
 
+
+    /* раз у нас большие элементы могут тормозить весь процесс, то можно их перекидывать
+     не на соседнее место, а подальше. Так мы уменьшим количество перестановок,
+     а с ними сэкономим и процессорное время, нужное на их обработку https://thecode.media/comb-sort/ */
+
+    //сортировка расчёской (ещё более быстрый вариант)
+    public static void startCombSort(int [] mas){
+        float CONST = 1.3f; //получено эксп. путём
+        int step = Math.round(mas.length/CONST);
+
+        //TODO: есть нюанс с последней проверкой (каждого числа между собой)
+        while (step > 1){
+            for(int i = 0; i + step < mas.length; i++){
+                if(mas[i] > mas[i + step]){
+                    int temp = mas[i];
+                    mas[i] = mas[i + step];
+                    mas[i + step] = temp;
+                }
+            }
+
+            if(step > 1){
+                step = (int)(step/CONST);
+            }
         }
     }
 
@@ -69,3 +92,6 @@ public class Runner {
         System.out.print("];");
     }
 }
+
+
+
