@@ -1,11 +1,9 @@
 package an.poliakov.set;
 
 /**
- *
- * Основные операции и приёмы работы с Set коллекцией
- * 
+ * Основные операции при работе с Set коллекцией
  * */
-public class Runner {
+public class RunnerSet {
     public static void main(String[] args) {
 
     }
