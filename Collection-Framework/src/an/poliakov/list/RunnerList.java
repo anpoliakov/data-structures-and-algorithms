@@ -8,10 +8,17 @@ import java.util.*;
 public class RunnerList {
     public static void main(String[] args) {
         RunnerList runer = new RunnerList();
+
         List <Integer> list = new ArrayList<>(15);
         runer.fillListNumbers(5,15, list);
         runer.fillListNumbers(10,20, list);
         runer.showList(list);
+
+        List <Integer> list2 = new ArrayList<>(15);
+        runer.fillListNumbers(30,40, list2);
+
+        List<Integer> newMainList = runer.createListBaseOn(list,list2);
+        runer.showList(newMainList);
     }
 
     private void showList(List <Integer> list){
@@ -25,6 +32,18 @@ public class RunnerList {
                 list.add(new Integer (i));
             }
         }
+    }
+
+    //обьединяет несколько списков в один
+    private List<Integer> createListBaseOn(List<Integer> firstList, List<Integer> secondlist){
+        List<Integer> newList = new ArrayList<>(30);
+        if(!firstList.isEmpty() || !secondlist.isEmpty()){
+            newList.addAll(firstList);
+            newList.addAll(secondlist);
+        }else {
+            System.out.println("Ошибка - проверь, содержатся ли значения в списке");
+        }
+        return newList;
     }
 
     //удаляет обьект из списка, если список не пуст
