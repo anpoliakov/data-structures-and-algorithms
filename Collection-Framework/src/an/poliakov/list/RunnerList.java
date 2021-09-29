@@ -8,32 +8,27 @@ import java.util.*;
 public class RunnerList {
     public static void main(String[] args) {
         RunnerList runer = new RunnerList();
-
-        List<Integer> list = new ArrayList<>();
-        for(int i = 5; i <= 10; i++){
-            list.add(i);
-        }
-
-        runer.deleteElement(new Integer(6),list);
-
-//        //ограниченные методы, более функциональный класс это ListIterator
-//        Iterator<Integer> iterator = list.iterator();
-//        while(iterator.hasNext()){
-//            System.out.println(iterator.next());
-//        }
-//
-//        //во время работы с ListIterator не могу использовать методы List (ошибка)
-//        System.out.println("ListIterator: ");
-//        ListIterator<Integer> listIterator = list.listIterator(3); //получаю итератор уже с нужной точки
-//        while (listIterator.hasNext()){
-//            System.out.println(listIterator.nextIndex() + " = " + listIterator.next());
-//        }
-//
-//        //TODO: Spliterator
-//        System.out.println(list);
+        List <Integer> list = new ArrayList<>(15);
+        runer.fillListNumbers(5,15, list);
+        runer.fillListNumbers(10,20, list);
+        runer.showList(list);
     }
 
-    public void deleteElement(Integer number, List <Integer> list){
+    private void showList(List <Integer> list){
+        System.out.println(list);
+    }
+
+    //заполняет массив не повторяющимися значениями
+    private void fillListNumbers(int start, int end, List <Integer> list){
+        for (int i = start; i <= end; i++){
+            if (!list.contains(i)){
+                list.add(new Integer (i));
+            }
+        }
+    }
+
+    //удаляет обьект из списка, если список не пуст
+    private void deleteElement(Integer number, List <Integer> list){
         if(!list.isEmpty()){
             if(list.remove(number)){
                 System.out.println("Элемент - " + number + " удалён");
@@ -42,3 +37,5 @@ public class RunnerList {
         System.out.println(list);
     }
 }
+
+//TODO: поработать с итератором 
