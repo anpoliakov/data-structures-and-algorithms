@@ -19,6 +19,15 @@ public class RunnerList {
 
         List<Integer> newMainList = runer.createListBaseOn(list,list2);
         runer.showList(newMainList);
+
+        //есть метод iterator() и метод более продвинутый listIterator
+        //с возможностью ходить по списку как вперёд/так и назад
+        ListIterator<Integer> listIterator = list.listIterator();
+        List<Integer> shortList = list.subList(0, 5);
+
+        System.out.println("До comparator - " + list);
+        runer.myComparator(list);
+        System.out.println("После comparator- " + list);
     }
 
     private void showList(List <Integer> list){
@@ -54,6 +63,17 @@ public class RunnerList {
             }
         }
         System.out.println(list);
+    }
+
+    //отсортировать по убыванию (свой компаратор)
+    private void myComparator(List <Integer> list){
+        list.sort((el1,el2) -> {
+            if(el1 < el2){
+                return 1;
+            }else{
+                return -1;
+            }
+        });
     }
 }
 
