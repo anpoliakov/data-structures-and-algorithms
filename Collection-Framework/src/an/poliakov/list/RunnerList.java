@@ -28,10 +28,17 @@ public class RunnerList {
         System.out.println("До comparator - " + list);
         runer.myComparator(list);
         System.out.println("После comparator- " + list);
+        
+        runer.catchUpEachNumber(list);
+        System.out.println(list);
     }
 
     private void showList(List <Integer> list){
-        System.out.println(list);
+        if(!list.isEmpty()){
+            System.out.println(list);
+        }else {
+            System.out.println("Your list is empty!");
+        }
     }
 
     //заполняет массив не повторяющимися значениями
@@ -74,6 +81,11 @@ public class RunnerList {
                 return -1;
             }
         });
+    }
+
+    //обратиться к каждому элементу в списке и увеличить его на 2
+    private void catchUpEachNumber(List <Integer> list){
+        list.replaceAll(b -> new Integer(b+2));
     }
 }
 
