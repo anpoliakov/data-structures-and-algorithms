@@ -30,6 +30,7 @@ public class RunnerList {
         System.out.println("После comparator- " + list);
         
         runer.catchUpEachNumber(list);
+        runer.catchUpEachNumber(list);
         System.out.println(list);
     }
 
