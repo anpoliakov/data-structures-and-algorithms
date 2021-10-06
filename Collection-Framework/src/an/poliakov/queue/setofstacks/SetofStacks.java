@@ -2,7 +2,6 @@ package an.poliakov.queue.setofstacks;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 /**
  * Основной класс который будет заниматься всем распределением обьектов по стекам
@@ -11,7 +10,7 @@ public class SetofStacks {
     private final int MAX_SIZE_STECK = 5;
     private int copacity;
 
-    private ArrayList <PriorityQueue<String>> stacks = new ArrayList<>();
+    private ArrayList <PriorityQueue<String>> stacks = new ArrayList<>(copacity);
 
     public SetofStacks(int copacity){
         this.copacity = copacity;
@@ -40,7 +39,27 @@ public class SetofStacks {
     }
 
     //универсальнеый метод для получения
+    //если последняя очередь пуста - удалить её
     public String pop (){
-        return null;
+        PriorityQueue <String> lastQueue = getLastQeque(); //null - если list пуст
+        boolean queueisEmpty = true;
+
+        if(lastQueue != null){ // если что то получил
+            do {
+                if(lastQueue.size() == 0 && stacks.size() != 0){ //полученный список пуст => удаляем его
+                    stacks.remove(lastQueue);
+                    stacks.trimToSize();
+                    lastQueue = getLastQeque();
+                }else {
+                    queueisEmpty = false;
+                }
+            }while (queueisEmpty);
+
+            return lastQueue.poll();
+            //TODO проверка опустела ли очередь - если да то удалить её и
+        }else {
+            System.out.println("-- LIST is EMPTY --");
+            return null;
+        }
     }
 }
