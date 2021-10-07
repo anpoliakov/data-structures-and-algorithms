@@ -12,7 +12,20 @@ import java.util.*;
 public class RunnerQueue {
     public static void main(String[] args) {
         SetofStacks st = new SetofStacks(5);
-        st.push("Sr");
+        st.push("Str11");
+        st.push("Str12");
+        st.push("Str13");
+        st.push("Str14");
+        st.push("Str15");
+        st.push("Str16");
 
+        st.pop();
+        st.pop();
+        st.pop();
+        st.pop();
+        st.pop();
+        st.pop();
+        st.pop();
+        st.pop();
     }
 }

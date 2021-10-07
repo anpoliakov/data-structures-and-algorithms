@@ -16,16 +16,24 @@ public class SetofStacks {
         this.copacity = copacity;
     }
 
-    //если list очередей не пуст - возвращаем последнюю Queue
+    //ищем в list очередь с хотя бы 1 элементом и возвращаем эту очередь - в противном null
     private PriorityQueue<String> getLastQeque(){
+        PriorityQueue <String> lastQueue = null;
+
         if(stacks.size() == 0){
             return null;
         }
-        return stacks.get(stacks.size() - 1);
+
+        do{
+            lastQueue = stacks.get(stacks.size() - 1);
+        }while(!isQueueCompleted(lastQueue) && stacks.size() > 0);
+
+        return lastQueue;
     }
 
     //универсальнеый метод для добавления
-    public void push (String string){
+    public void push(String string){
+        //TODO ограничение по созданию списков в list
         PriorityQueue <String> lastQueue = getLastQeque();
         if(lastQueue != null && lastQueue.size() < MAX_SIZE_STECK){
             lastQueue.add(string);
@@ -40,26 +48,29 @@ public class SetofStacks {
 
     //универсальнеый метод для получения
     //если последняя очередь пуста - удалить её
-    public String pop (){
-        PriorityQueue <String> lastQueue = getLastQeque(); //null - если list пуст
-        boolean queueisEmpty = true;
-
-        if(lastQueue != null){ // если что то получил
-            do {
-                if(lastQueue.size() == 0 && stacks.size() != 0){ //полученный список пуст => удаляем его
-                    stacks.remove(lastQueue);
-                    stacks.trimToSize();
-                    lastQueue = getLastQeque();
-                }else {
-                    queueisEmpty = false;
-                }
-            }while (queueisEmpty);
-
+    public String pop(){
+        PriorityQueue <String> lastQueue = getLastQeque();
+        if(lastQueue != null){ //следовательно содержит queue с хотя бы 1 элементом - получаем его
             return lastQueue.poll();
-            //TODO проверка опустела ли очередь - если да то удалить её и
-        }else {
-            System.out.println("-- LIST is EMPTY --");
-            return null;
         }
+        return null;
+    }
+
+    //не хорошая идея - но если переданная queue пустая, она её удаляет из list
+    //и сообщает что данная queue не готова к работе
+    //метод доступен только в этом классе
+    private boolean isQueueCompleted(PriorityQueue priorQueue){
+        boolean flag = false;
+
+        if(priorQueue != null){
+            if(priorQueue.size() > 0){
+                flag = true;
+            }else {
+                stacks.remove(priorQueue);
+                stacks.trimToSize();
+            }
+        }
+
+        return flag;
     }
 }
